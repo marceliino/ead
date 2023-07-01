@@ -7,7 +7,7 @@ spring:
   application:
     name: ead-authuser-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/ead-authuser
+    url:  jdbc:postgresql://localhost:5432/ead-authuser-v2
     username: postgres
     password: root
   jpa:
@@ -22,7 +22,8 @@ spring:
   output:
     ansi:
       enabled: Always
-
+  rabbitmq:
+    addresses: amqps://kxlqocnc:t6kKTWJ4URsvw3n94v0ZDb1eVXJyT-br@toad.rmq.cloudamqp.com/kxlqocnc
 
 logging:
   level:
@@ -35,6 +36,9 @@ ead:
   api:
     url:
       course: 'http://ead-course-service/ead-course'
+  broker:
+    exchange:
+      userEvent: ead.userevent
 
 eureka:
   client:
@@ -42,3 +46,19 @@ eureka:
       defaultZone: 'http://localhost:8761/eureka'
   instance:
     hostname: localhost
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      circuitbreakerInstance:
+        slidingWindowSize: 30
+        permittedNumberOfCallsInHalfOpenState: 2
+        slidingWindowType: TIME_BASED
+        minimumNumberOfCalls: 2
+        waitDurationInOpenState: 30s
+        failureRateThreshold: 80
+  retry:
+    instances:
+      retryInstance:
+        maxRetryAttempts: 3
+        waitDuration: 5s

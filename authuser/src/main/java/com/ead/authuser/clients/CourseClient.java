@@ -36,13 +36,12 @@ public class CourseClient {
     String REQUEST_URL_COURSE;
 
     //@Retry(name = "retryInstance", fallbackMethod = "retryfallback")
-    @CircuitBreaker(name = "circuitbreakerInstance")//, fallbackMethod = "circuitbreakerfallback"
+    @CircuitBreaker(name = "circuitbreakerInstance")
     public Page<CourseDto> getAllCoursesByUser(UUID userId, Pageable pageable){
         List<CourseDto> searchResult = null;
         String url = REQUEST_URL_COURSE + utilsService.createUrlGetAllCoursesByUser(userId, pageable);
         log.debug("Request URL: {} ", url);
         log.info("Request URL: {} ", url);
-        System.out.println("---Start Request ao Course Microservice---");
         try{
             ParameterizedTypeReference<ResponsePageDto<CourseDto>> responseType = new ParameterizedTypeReference<ResponsePageDto<CourseDto>>() {};
             ResponseEntity<ResponsePageDto<CourseDto>> result = restTemplate.exchange(url, HttpMethod.GET, null, responseType);

@@ -99,6 +99,4 @@ public class CourseServiceImpl implements CourseService {
             log.warn("Error sending notification!");
         }
     }
-
-
 }

@@ -1,6 +1,7 @@
 package com.ead.authuser.models;
 
 import com.ead.authuser.enums.RoleType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +28,8 @@ public class RoleModel implements GrantedAuthority, Serializable {
     private RoleType roleName;
 
     @Override
+    @JsonIgnore
     public String getAuthority() {
-        return null;
+        return this.roleName.toString();
     }
 }

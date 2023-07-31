@@ -14,7 +14,6 @@ public class JwtProvider {
     @Value("${ead.auth.jwtSecret}")
     private String jwtSecret;
 
-
     public String getSubjectJwt(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
@@ -32,7 +31,7 @@ public class JwtProvider {
         } catch (MalformedJwtException e) {
             log.error("Invalid JWT token: {}", e.getMessage());
         } catch (ExpiredJwtException e) {
-            log.error("JWT token is expired: {}", e.getMessage());
+            log.error("JWT token is expired ;): {}", e.getMessage());
         } catch (UnsupportedJwtException e) {
             log.error("JWT token is unsupported: {}", e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -40,7 +39,4 @@ public class JwtProvider {
         }
         return false;
     }
-
-
-
 }

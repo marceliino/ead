@@ -31,7 +31,7 @@ public class UserNotificationController {
     @GetMapping("/users/{userId}/notifications")
     public ResponseEntity<Page<NotificationModel>> getAllNotificationsByUser(@PathVariable(value="userId") UUID userId,
                                                                              @PageableDefault(page = 0, size = 10, sort = "notificationId", direction = Sort.Direction.ASC) Pageable pageable,
-                                                                             Authentication Authentication){
+                                                                             Authentication authentication){
         return ResponseEntity.status(HttpStatus.OK).body(notificationService.findAllNotificationsByUser(userId, pageable));
     }
 
@@ -49,6 +49,4 @@ public class UserNotificationController {
         notificationService.saveNotification(notificationModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body(notificationModelOptional.get());
     }
-
-
 }

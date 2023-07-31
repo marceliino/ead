@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-
 public class UserDetailsImpl implements UserDetails {
 
     private UUID userId;
@@ -32,7 +31,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+        return authorities;
     }
 
     @Override

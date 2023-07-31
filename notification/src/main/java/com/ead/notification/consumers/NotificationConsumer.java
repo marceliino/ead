@@ -37,5 +37,4 @@ public class NotificationConsumer {
         notificationModel.setNotificationStatus(NotificationStatus.CREATED);
         notificationService.saveNotification(notificationModel);
     }
-
 }

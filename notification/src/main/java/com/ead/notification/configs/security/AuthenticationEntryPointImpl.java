@@ -11,15 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 @Component
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
 
-    Logger log = LogManager.getLogger(JwtProvider.class);
+    Logger log = LogManager.getLogger(AuthenticationEntryPointImpl.class);
 
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         log.error("Unauthorized error: {}", e.getMessage());
-        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "UNAUTHORIZED");
     }
 }
